@@ -12,13 +12,9 @@ import { Graduate } from './graduates/entities/graduate.entity'; // or wherever 
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT || '5433', 10),
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
+      url: process.env.DATABASE_URL,
       autoLoadEntities: true,
-      synchronize: true, // use only in development
+      synchronize: true, // keep on for now to auto-create tables
     }),
     TypeOrmModule.forFeature([Graduate]),
     GraduatesModule,
