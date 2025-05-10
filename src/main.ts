@@ -15,7 +15,10 @@ async function bootstrap() {
     .addTag('graduates')
     .build();
 
-  const document = SwaggerModule.createDocument(app, config);
+  const document = SwaggerModule.createDocument(app, config, {
+    include: [AppModule],
+  });
+
   SwaggerModule.setup('api', app, document);
 
   await app.listen(process.env.PORT || 3000);
