@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
 import {
     IsString,
     IsEmail,
@@ -43,5 +44,6 @@ export class CreateGraduateDto {
     @ApiProperty({ required: false })
     @IsOptional()
     @IsUrl()
+    @Transform(({ value }) => value === '' ? undefined : value)
     portfolioUrl?: string;
 }
