@@ -9,8 +9,8 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   const config = new DocumentBuilder()
-    .setTitle('Graduate API')
-    .setDescription('API for managing graduates')
+    .setTitle('Employer Graduate Search API')
+    .setDescription('API for employers to find suitable graduates')
     .setVersion('1.0')
     .addTag('graduates')
     .build();

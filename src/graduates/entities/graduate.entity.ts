@@ -13,7 +13,6 @@ export class Graduate {
     @IsEmail()
     email: string;
 
-
     @Column()
     university: string;
 
