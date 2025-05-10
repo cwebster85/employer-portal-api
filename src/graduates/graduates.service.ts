@@ -41,9 +41,11 @@ export class GraduatesService {
       );
     });
 
+    const sorted = filtered.sort((a, b) => a.id - b.id);
+
     return {
       success: true,
-      data: filtered,
+      data: sorted,
     };
   }
 
