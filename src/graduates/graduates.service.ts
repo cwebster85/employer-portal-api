@@ -62,6 +62,10 @@ export class GraduatesService {
   }
 
   async remove(id: number): Promise<void> {
-    await this.graduateRepo.delete(id);
+    const result = await this.graduateRepo.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Graduate with ID ${id} not found`);
+    }
   }
+
 }
