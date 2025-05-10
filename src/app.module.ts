@@ -14,7 +14,10 @@ import { Graduate } from './graduates/entities/graduate.entity'; // or wherever 
       type: 'postgres',
       url: process.env.DATABASE_URL,
       autoLoadEntities: true,
-      synchronize: true, // keep on for now to auto-create tables
+      ssl: {
+        rejectUnauthorized: false, // needed this in order to allow pg connection
+      },
+      synchronize: true, // keep on to auto-create tables
     }),
     TypeOrmModule.forFeature([Graduate]),
     GraduatesModule,

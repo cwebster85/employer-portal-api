@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe } from '@nestjs/common';
 import { GraduatesService } from './graduates.service';
 import { CreateGraduateDto } from './dto/create-graduate.dto';
 import { UpdateGraduateDto } from './dto/update-graduate.dto';
@@ -19,17 +19,21 @@ export class GraduatesController {
 
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.graduatesService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.graduatesService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGraduateDto: UpdateGraduateDto) {
-    return this.graduatesService.update(+id, updateGraduateDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateGraduateDto: UpdateGraduateDto,
+  ) {
+    return this.graduatesService.update(id, updateGraduateDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.graduatesService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.graduatesService.remove(id);
   }
+
 }

@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Graduate } from './entities/graduate.entity';
@@ -12,10 +12,18 @@ export class GraduatesService {
     private readonly graduateRepo: Repository<Graduate>,
   ) { }
 
-  async create(createGraduateDto: CreateGraduateDto): Promise<Graduate> {
-    const graduate = this.graduateRepo.create(createGraduateDto);
-    return this.graduateRepo.save(graduate);
+  async create(dto: CreateGraduateDto): Promise<Graduate> {
+    try {
+      const grad = this.graduateRepo.create(dto);
+      return await this.graduateRepo.save(grad);
+    } catch (err) {
+      if (err.code === '23505') { // Postgres unique_violation
+        throw new ConflictException('Email already exists');
+      }
+      throw err;
+    }
   }
+
 
   async findAll(query: any): Promise<{ success: boolean; data: Graduate[] }> {
     const { skill, graduationYear } = query;
