@@ -33,7 +33,6 @@ export class GraduatesService {
 
     const allGraduates = await this.graduateRepo.find();
 
-    // Filter by skill manually, since 'skills' is likely an array column
     const filtered = allGraduates.filter((grad) => {
       return (
         (!skill || grad.skills.includes(skill)) &&

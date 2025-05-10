@@ -5,7 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GraduatesModule } from './graduates/graduates.module';
-import { Graduate } from './graduates/entities/graduate.entity'; // or wherever it's defined
+import { Graduate } from './graduates/entities/graduate.entity';
 
 @Module({
   imports: [
