@@ -14,15 +14,20 @@ export class GraduatesService {
 
   async create(dto: CreateGraduateDto): Promise<Graduate> {
     try {
-      const grad = this.graduateRepo.create(dto);
+      const grad = this.graduateRepo.create({
+        ...dto,
+        portfolioUrl: dto.portfolioUrl ?? null,
+      });
+
       return await this.graduateRepo.save(grad);
     } catch (err) {
-      if (err.code === '23505') { // Postgres unique_violation
+      if (err.code === '23505') {
         throw new ConflictException('Email already exists');
       }
       throw err;
     }
   }
+
 
 
   async findAll(query: any): Promise<{ success: boolean; data: Graduate[] }> {
@@ -55,7 +60,6 @@ export class GraduatesService {
     }
     return graduate;
   }
-
 
   async update(id: number, updateGraduateDto: UpdateGraduateDto): Promise<Graduate> {
     await this.graduateRepo.update(id, updateGraduateDto);
