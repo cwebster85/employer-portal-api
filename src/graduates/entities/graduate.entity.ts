@@ -26,5 +26,5 @@ export class Graduate {
     skills: string[];
 
     @Column({ nullable: true })
-    portfolioUrl: string | null;
+    portfolioUrl?: string;
 }
