@@ -3,28 +3,28 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
 export class Graduate {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    fullName: string;
+  @Column()
+  fullName: string;
 
-    @Column({ unique: true })
-    @IsEmail()
-    email: string;
+  @Column({ unique: true })
+  @IsEmail()
+  email: string;
 
-    @Column()
-    university: string;
+  @Column()
+  university: string;
 
-    @Column()
-    degree: string;
+  @Column()
+  degree: string;
 
-    @Column()
-    graduationYear: number;
+  @Column()
+  graduationYear: number;
 
-    @Column("text", { array: true })
-    skills: string[];
+  @Column('text', { array: true })
+  skills: string[];
 
-    @Column({ nullable: true })
-    portfolioUrl?: string;
+  @Column({ nullable: true })
+  portfolioUrl?: string;
 }

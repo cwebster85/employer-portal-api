@@ -12,7 +12,8 @@ describe('GraduatesController (e2e)', () => {
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       controllers: [GraduatesController],
-      providers: [GraduatesService,
+      providers: [
+        GraduatesService,
         {
           provide: getRepositoryToken(Graduate),
           useValue: {
@@ -20,9 +21,9 @@ describe('GraduatesController (e2e)', () => {
             findOne: jest.fn(),
             findAll: jest.fn(),
             update: jest.fn(),
-            remove: jest.fn()
-          }
-        }
+            remove: jest.fn(),
+          },
+        },
       ],
     }).compile();
 
@@ -31,7 +32,7 @@ describe('GraduatesController (e2e)', () => {
   });
 
   afterEach(async () => {
-    await app.close()
+    await app.close();
   });
 
   it.skip('should create a graduate profile', async () => {

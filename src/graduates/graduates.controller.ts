@@ -9,23 +9,16 @@ import {
   Query,
   ParseIntPipe,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 
 import { GraduatesService } from './graduates.service';
 import { CreateGraduateDto } from './dto/create-graduate.dto';
 import { UpdateGraduateDto } from './dto/update-graduate.dto';
 
-
 @ApiTags('graduates')
 @Controller('graduates')
 export class GraduatesController {
-
-  constructor(private readonly graduatesService: GraduatesService) { }
+  constructor(private readonly graduatesService: GraduatesService) {}
 
   @Post()
   @ApiOperation({ summary: 'Create a new graduate' })
@@ -72,5 +65,4 @@ export class GraduatesController {
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.graduatesService.remove(id);
   }
-
 }

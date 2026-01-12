@@ -38,42 +38,36 @@ describe('Graduates API (e2e)', () => {
   });
 
   it('should return 400 if required fields are missing', async () => {
-    const res = await request(app.getHttpServer())
-      .post('/graduates')
-      .send({
-        email: 'missing@data.com'
-        // missing required fields like fullName, university etc.
-      });
+    const res = await request(app.getHttpServer()).post('/graduates').send({
+      email: 'missing@data.com',
+      // missing required fields like fullName, university etc.
+    });
 
     expect(res.status).toBe(400);
   });
 
   it('should return 400 for invalid graduation year', async () => {
-    const res = await request(app.getHttpServer())
-      .post('/graduates')
-      .send({
-        fullName: 'Invalid Year',
-        email: 'bad@year.com',
-        university: 'Nowhere',
-        degree: 'Nothing',
-        graduationYear: 'not-a-year',
-        skills: [],
-      });
+    const res = await request(app.getHttpServer()).post('/graduates').send({
+      fullName: 'Invalid Year',
+      email: 'bad@year.com',
+      university: 'Nowhere',
+      degree: 'Nothing',
+      graduationYear: 'not-a-year',
+      skills: [],
+    });
 
     expect(res.status).toBe(400);
   });
 
   it('should return 400 if skills is missing or not an array', async () => {
-    const res = await request(app.getHttpServer())
-      .post('/graduates')
-      .send({
-        fullName: 'Invalid',
-        email: 'invalid@x.com',
-        university: 'Bad Uni',
-        degree: 'Arts',
-        graduationYear: 2023,
-        skills: 'not-an-array', // invalid type
-      });
+    const res = await request(app.getHttpServer()).post('/graduates').send({
+      fullName: 'Invalid',
+      email: 'invalid@x.com',
+      university: 'Bad Uni',
+      degree: 'Arts',
+      graduationYear: 2023,
+      skills: 'not-an-array', // invalid type
+    });
 
     expect(res.status).toBe(400);
   });
@@ -90,10 +84,10 @@ describe('Graduates API (e2e)', () => {
 
     await request(app.getHttpServer()).post('/graduates').send(data); // first time
 
-    const res = await request(app.getHttpServer()).post('/graduates').send(data); // duplicate
+    const res = await request(app.getHttpServer())
+      .post('/graduates')
+      .send(data); // duplicate
 
     expect(res.status).toBe(409);
   });
-
-
 });

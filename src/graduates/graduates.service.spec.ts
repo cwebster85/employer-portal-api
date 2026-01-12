@@ -4,7 +4,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Graduate } from './entities/graduate.entity';
 
 describe('GraduatesService', () => {
-  let service: GraduatesService;  
+  let service: GraduatesService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -17,9 +17,9 @@ describe('GraduatesService', () => {
             findOne: jest.fn(),
             findAll: jest.fn(),
             update: jest.fn(),
-            remove: jest.fn()
-          }
-        }
+            remove: jest.fn(),
+          },
+        },
       ],
     }).compile();
 
