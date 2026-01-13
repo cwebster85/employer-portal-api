@@ -34,7 +34,8 @@ describe('Graduates API (e2e)', () => {
 
     expect(res.status).toBe(201);
     expect(res.body).toHaveProperty('id');
-    expect(res.body.fullName).toBe('Katy Strang');
+
+    expect(res.body as { fullName: string }).toBe('Katy Strang');
   });
 
   it('should return 400 if required fields are missing', async () => {

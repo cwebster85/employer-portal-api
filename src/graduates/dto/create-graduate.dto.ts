@@ -44,6 +44,8 @@ export class CreateGraduateDto {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsUrl()
-  @Transform(({ value }) => (value === '' ? undefined : value))
+  @Transform(({ value }: { value: string }) =>
+    value === '' ? undefined : value,
+  )
   portfolioUrl?: string;
 }

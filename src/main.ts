@@ -8,7 +8,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: (origin, callback) => {
+    origin: (
+      origin: string | undefined,
+      callback: (err: null | Error, allowed?: boolean) => void,
+    ) => {
       if (!origin || origin.endsWith('.vercel.app')) {
         callback(null, true);
       } else {

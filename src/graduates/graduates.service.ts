@@ -21,7 +21,8 @@ export class GraduatesService {
       const grad = this.graduateRepo.create(dto);
       return await this.graduateRepo.save(grad);
     } catch (err) {
-      if (err.code === '23505') {
+      const error = err as { code?: string };
+      if (error.code === '23505') {
         // Postgres unique_violation
         throw new ConflictException('Email already exists');
       }
@@ -29,10 +30,13 @@ export class GraduatesService {
     }
   }
 
-  async findAll(query: any): Promise<{ success: boolean; data: Graduate[] }> {
+  async findAll(query: {
+    skill?: string;
+    graduationYear?: number;
+  }): Promise<{ success: boolean; data: Graduate[] }> {
     const { skill, graduationYear } = query;
 
-    const where: any = {};
+    const where: { graduationYear?: number } = {};
     if (graduationYear) where.graduationYear = +graduationYear;
 
     const allGraduates = await this.graduateRepo.find();
